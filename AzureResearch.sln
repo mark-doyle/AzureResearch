@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.Common", "AzureResearch.Common\AzureResearch.Common.csproj", "{649F892B-96C0-418C-BDC0-1DEBD2CB3A39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.PerformanceComparisons", "AzureResearch.PerformanceComparisons\AzureResearch.PerformanceComparisons.csproj", "{06D65083-48B4-42BF-8931-F44E4FFD0B73}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{649F892B-96C0-418C-BDC0-1DEBD2CB3A39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{649F892B-96C0-418C-BDC0-1DEBD2CB3A39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{649F892B-96C0-418C-BDC0-1DEBD2CB3A39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{649F892B-96C0-418C-BDC0-1DEBD2CB3A39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06D65083-48B4-42BF-8931-F44E4FFD0B73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06D65083-48B4-42BF-8931-F44E4FFD0B73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06D65083-48B4-42BF-8931-F44E4FFD0B73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06D65083-48B4-42BF-8931-F44E4FFD0B73}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

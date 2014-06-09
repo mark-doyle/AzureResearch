@@ -27,6 +27,52 @@ namespace AzureResearch.PerformanceComparisons
          */
         static void Main(string[] args)
         {
+            int selection = DisplayMenuAndGetSelection();
+            while (selection != 0)
+            {
+                selection = DisplayMenuAndGetSelection();
+
+                switch (selection)
+                {
+                    case 1:
+                        LoadData();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        static int DisplayMenuAndGetSelection()
+        {
+            string selection = null;
+            int selectionParsed = -1;
+            while (selectionParsed == -1)
+            {
+                Console.Clear();
+
+                Console.WriteLine("*** Azure Research ***");
+                Console.WriteLine("1 - Data load");
+                Console.WriteLine("2 - Parallel versus serial retrieval");
+                Console.WriteLine("3 - ITableEntity versus Customer (Data Service Key) retrieval");
+                Console.WriteLine("4 - Narrow versus Wide retrieval");
+                Console.WriteLine("0 - Exit");
+
+                Console.Write("Enter selection: ");
+                selection = Console.ReadLine();
+
+                int.TryParse(selection, out selectionParsed);
+            }
+            return selectionParsed;
+        }
+
+        static void LoadData() 
+        {
+            DataLoader loader = new DataLoader();
+
+            Console.WriteLine("Press ENTER to begin loading data");
+            loader.LoadData();
+            Console.WriteLine("Complete. Press ENTER");
         }
     }
 }

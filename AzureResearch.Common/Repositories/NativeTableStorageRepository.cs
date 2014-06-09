@@ -1,6 +1,7 @@
 ﻿using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using Microsoft.WindowsAzure.Storage.Table.DataServices;
+using Microsoft.WindowsAzure.Storage.Table.Protocol;
 using System;
 using System.Collections.Generic;
 using System.Data.Services.Client;
@@ -11,14 +12,14 @@ using System.Threading.Tasks;
 
 namespace AzureResearch.Common.Repositories
 {
-    public class NativeTableStorageRepository<T> : ITableStorageRepository<T> where T : TableEntity
+    public class NativeTableStorageRepository<T> : ITableStorageRepository<T> where T : class, ITableEntity, new()
     {
         #region Declarations
 
         protected readonly CloudStorageAccount _cloudStorageAccount;
         protected TableServiceContext _tableContext;
         protected string _tableName;
-        protected CloudTable _cloudTable;
+        protected CloudTableClient _tableClient;
 
         #endregion // Declarations
 
@@ -78,9 +79,9 @@ namespace AzureResearch.Common.Repositories
             _cloudStorageAccount = cloudStorageAccount;
             _tableName = tableName;
 
-            CloudTableClient tableClient = _cloudStorageAccount.CreateCloudTableClient();
-            _cloudTable = tableClient.GetTableReference(_tableName);
-            _cloudTable.CreateIfNotExists();
+            _tableClient = _cloudStorageAccount.CreateCloudTableClient();
+            var cloudTable = _tableClient.GetTableReference(_tableName);
+            cloudTable.CreateIfNotExists();
         }
 
         #endregion // Constructors
@@ -101,6 +102,7 @@ namespace AzureResearch.Common.Repositories
                 int pass = 0;
                 int actualResults = 0;
                 int batchSize = 100;
+                var cloudTable = _tableClient.GetTableReference(_tableName);
 
                 do
                 {
@@ -119,9 +121,11 @@ namespace AzureResearch.Common.Repositories
                                     batchOperation.Insert(item);
                                     break;
                                 case BatchOperationType.Update:
+                                    item.ETag = "*";
                                     batchOperation.Replace(item);
                                     break;
                                 case BatchOperationType.Upsert:
+                                    item.ETag = "*";
                                     batchOperation.InsertOrReplace(item);
                                     break;
                                 case BatchOperationType.Delete:
@@ -132,7 +136,7 @@ namespace AzureResearch.Common.Repositories
                             actualResults++;
                         }
 
-                        _cloudTable.ExecuteBatch(batchOperation);
+                        cloudTable.ExecuteBatch(batchOperation);
                     }
                     pass++;
                 }
@@ -146,29 +150,30 @@ namespace AzureResearch.Common.Repositories
 
         public virtual T GetEntity(string partitionKey, string rowKey)
         {
-            var query =
-                (from entity in TableServiceContext.CreateQuery<T>(_tableName)
-                 where entity.PartitionKey == partitionKey && entity.RowKey == rowKey
-                 select entity).AsTableServiceQuery(TableServiceContext);
+            var cloudTable = _tableClient.GetTableReference(_tableName);
+            var query = TableOperation.Retrieve<T>(partitionKey, rowKey);
+            var result = cloudTable.Execute(query).Result;
 
-            return query.Execute().FirstOrDefault();
+            return result as T;
         }
 
         public virtual IEnumerable<T> GetEntities(string partitionKey)
         {
-            return
-                (from entity in TableServiceContext.CreateQuery<T>(_tableName)
-                 where entity.PartitionKey == partitionKey
-                 select entity).AsTableServiceQuery(TableServiceContext);
+            var cloudTable = _tableClient.GetTableReference(_tableName);
+            var partitionKeyFilter = TableQuery.GenerateFilterCondition(TableConstants.PartitionKey, QueryComparisons.Equal, partitionKey);
+            var query = new TableQuery<T>().Where(partitionKeyFilter);
+            var entities = cloudTable.ExecuteQuery(query).ToList();
+
+            return entities;
         }
 
         public virtual IEnumerable<T> GetEntities(string partitionKey, IEnumerable<string> rowKeys)
         {
-            List<T> results = new List<T>();
+            var results = new List<T>();
 
-            List<Task<T>> tasks = (from rowKey in rowKeys
-                                   select Task<T>.Factory.StartNew(() => GetEntity(partitionKey, rowKey))).ToList();
-            Task.WaitAll(tasks.ToArray());
+            var tasks = (from rowKey in rowKeys
+                         select Task<T>.Factory.StartNew(() => GetEntity(partitionKey, rowKey))).ToList();
+            Task.WaitAll(tasks.Cast<Task>().ToArray());
             tasks.ForEach(task => results.Add(task.Result));
 
             return results;
@@ -176,29 +181,34 @@ namespace AzureResearch.Common.Repositories
 
         public virtual IEnumerable<T> GetEntities(string partitionKey, string minRowKey, string maxRowKey)
         {
-            return
-                (from entity in TableServiceContext.CreateQuery<T>(_tableName)
-                 where entity.PartitionKey == partitionKey && entity.RowKey.CompareTo(minRowKey) >= 0 && entity.RowKey.CompareTo(maxRowKey) <= 0
-                 select entity).AsTableServiceQuery(TableServiceContext);
-        }
+            var cloudTable = _tableClient.GetTableReference(_tableName);
+            var partitionFilter = TableQuery.GenerateFilterCondition(TableConstants.PartitionKey, QueryComparisons.Equal, partitionKey);
+            var minFilter = TableQuery.GenerateFilterCondition(TableConstants.RowKey, QueryComparisons.GreaterThanOrEqual, minRowKey);
+            var maxFilter = TableQuery.GenerateFilterCondition(TableConstants.RowKey, QueryComparisons.LessThanOrEqual, maxRowKey);
 
-        public virtual IEnumerable<T> GetWhere(Expression<Func<T, bool>> expression)
-        {
-            var query = this.TableServiceContext.CreateQuery<T>(this._tableName);
-            return query.Where(expression);
+            var combinedRowFilter = TableQuery.CombineFilters(minFilter, TableOperators.And, maxFilter);
+            var combinedFilter = TableQuery.CombineFilters(partitionFilter, TableOperators.And, combinedRowFilter);
+
+            var query = new TableQuery<T>().Where(combinedFilter);
+            var entities = cloudTable.ExecuteQuery(query).ToList();
+
+            return entities;
         }
 
         public virtual IEnumerable<T> GetAllEntities()
         {
-            return
-                (from entity in TableServiceContext.CreateQuery<T>(_tableName)
-                 select entity).AsTableServiceQuery(TableServiceContext);
+            var cloudTable = _tableClient.GetTableReference(_tableName);
+            var query = cloudTable.CreateQuery<T>();
+            var results = cloudTable.ExecuteQuery(query).ToList();
+
+            return results;
         }
 
         public virtual void InsertEntity(T entity)
         {
+            var cloudTable = _tableClient.GetTableReference(_tableName);
             TableOperation insertOperation = TableOperation.Insert(entity);
-            _cloudTable.Execute(insertOperation);
+            cloudTable.Execute(insertOperation);
         }
 
         public virtual void InsertBatch(IEnumerable<T> entities)
@@ -208,8 +218,9 @@ namespace AzureResearch.Common.Repositories
 
         public virtual void UpdateEntity(T entity)
         {
+            var cloudTable = _tableClient.GetTableReference(_tableName);
             TableOperation replaceOperation = TableOperation.Replace(entity);
-            _cloudTable.Execute(replaceOperation);
+            cloudTable.Execute(replaceOperation);
         }
 
         public virtual void UpdateBatch(IEnumerable<T> entities)
@@ -219,8 +230,9 @@ namespace AzureResearch.Common.Repositories
 
         public virtual void UpsertEntity(T entity)
         {
+            var cloudTable = _tableClient.GetTableReference(_tableName);
             TableOperation upsertOperation = TableOperation.InsertOrReplace(entity);
-            _cloudTable.Execute(upsertOperation);
+            cloudTable.Execute(upsertOperation);
         }
 
         public virtual void UpsertBatch(IEnumerable<T> entities)
@@ -230,8 +242,9 @@ namespace AzureResearch.Common.Repositories
 
         public virtual void DeleteEntity(T entity)
         {
+            var cloudTable = _tableClient.GetTableReference(_tableName);
             TableOperation deleteOperation = TableOperation.Delete(entity);
-            _cloudTable.Execute(deleteOperation);
+            cloudTable.Execute(deleteOperation);
         }
 
         public virtual void DeleteBatch(IEnumerable<T> entities)

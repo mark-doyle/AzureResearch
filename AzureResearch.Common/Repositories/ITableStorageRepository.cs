@@ -14,7 +14,6 @@ namespace AzureResearch.Common.Repositories
         IEnumerable<T> GetEntities(string partitionKey);
         IEnumerable<T> GetEntities(string partitionKey, IEnumerable<string> rowKeys);
         IEnumerable<T> GetEntities(string partitionKey, string minRowKey, string maxRowKey);
-        IEnumerable<T> GetWhere(Expression<Func<T, bool>> expression);
         IEnumerable<T> GetAllEntities();
 
         // Insert entity

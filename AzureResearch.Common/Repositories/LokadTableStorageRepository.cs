@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AzureResearch.Common.Repositories
 {
-    public class LokadTableStorageRepository<T> : ITableStorageRepository<T> where T : TableEntity
+    public class LokadTableStorageRepository<T> : ITableStorageRepository<T> where T : class, ITableEntity, new()
     {
 
         // Name of table where BaseEntities are
@@ -190,11 +190,6 @@ namespace AzureResearch.Common.Repositories
             }
 
             return TableStorageProvider.Get<T>(TableName, partitionKey, minRowKey, maxRowKey).Select(e => e.Value);
-        }
-
-        public IEnumerable<T> GetWhere(Expression<Func<T, bool>> expression)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
