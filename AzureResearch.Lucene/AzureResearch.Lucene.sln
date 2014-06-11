@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.Common", "..\AzureResearch.Common\AzureResearch.Common.csproj", "{649F892B-96C0-418C-BDC0-1DEBD2CB3A39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.Search.Lucene", "AzureResearch.Search.Lucene\AzureResearch.Search.Lucene.csproj", "{200D7AC4-91F9-42DD-A7D6-361B3BFB310E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.Search.IndexLoader", "AzureResearch.Search.IndexLoader\AzureResearch.Search.IndexLoader.csproj", "{A989F5D2-79DC-4D06-A45A-4682F44E6FCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.Search.IndexingWorker", "AzureResearch.Search.IndexingWorker\AzureResearch.Search.IndexingWorker.csproj", "{EE58689C-9F1A-48CF-B79B-2A7EC8126158}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{649F892B-96C0-418C-BDC0-1DEBD2CB3A39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{649F892B-96C0-418C-BDC0-1DEBD2CB3A39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{649F892B-96C0-418C-BDC0-1DEBD2CB3A39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{649F892B-96C0-418C-BDC0-1DEBD2CB3A39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{200D7AC4-91F9-42DD-A7D6-361B3BFB310E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{200D7AC4-91F9-42DD-A7D6-361B3BFB310E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{200D7AC4-91F9-42DD-A7D6-361B3BFB310E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{200D7AC4-91F9-42DD-A7D6-361B3BFB310E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A989F5D2-79DC-4D06-A45A-4682F44E6FCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A989F5D2-79DC-4D06-A45A-4682F44E6FCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A989F5D2-79DC-4D06-A45A-4682F44E6FCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A989F5D2-79DC-4D06-A45A-4682F44E6FCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE58689C-9F1A-48CF-B79B-2A7EC8126158}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE58689C-9F1A-48CF-B79B-2A7EC8126158}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE58689C-9F1A-48CF-B79B-2A7EC8126158}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE58689C-9F1A-48CF-B79B-2A7EC8126158}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
