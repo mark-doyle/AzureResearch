@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-
 using Microsoft.WindowsAzure.Storage.Table;
 
 namespace AzureResearch.Common.Entities
 {
+    [DataContract]
     public class CustomSearchEntity : TableEntity
     {
         #region Declarations
@@ -32,13 +33,21 @@ namespace AzureResearch.Common.Entities
 
         #region Public Properties
 
+        [DataMember]
         public string FirstName { get; set; }
+        [DataMember]
         public string LastName { get; set; }
+        [DataMember]
         public string EmailAddress { get; set; }
+        [DataMember]
         public string Gender { get; set; }
+        [DataMember]
         public DateTime DateOfBirth { get; set; }
+        [DataMember]
         public int YearsAtAddress { get; set; }
+        [DataMember]
         public int HeightInInches { get; set; }
+        [DataMember]
         public bool IsMarried { get; set; }
 
         #endregion // Public Properties

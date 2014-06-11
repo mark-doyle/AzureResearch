@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.Search.IndexL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.Search.IndexingWorker", "AzureResearch.Search.IndexingWorker\AzureResearch.Search.IndexingWorker.csproj", "{EE58689C-9F1A-48CF-B79B-2A7EC8126158}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.Search.WebApi", "AzureResearch.Search.WebApi\AzureResearch.Search.WebApi.csproj", "{FDE49C74-2AA9-4107-B849-A6A4D732F3FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{EE58689C-9F1A-48CF-B79B-2A7EC8126158}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE58689C-9F1A-48CF-B79B-2A7EC8126158}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE58689C-9F1A-48CF-B79B-2A7EC8126158}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDE49C74-2AA9-4107-B849-A6A4D732F3FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDE49C74-2AA9-4107-B849-A6A4D732F3FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDE49C74-2AA9-4107-B849-A6A4D732F3FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDE49C74-2AA9-4107-B849-A6A4D732F3FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

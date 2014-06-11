@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage.Table;
 
 namespace AzureResearch.Common.Entities
 {
+    [DataContract]
     public class SearchResult<T> where T : TableEntity
     {
         #region Declarations
@@ -31,7 +33,9 @@ namespace AzureResearch.Common.Entities
 
         #region Public Properties
 
+        [DataMember]
         public int ResultCount { get; set; }
+        [DataMember]
         public List<T> Results { get; set; }
 
         #endregion // Public Properties

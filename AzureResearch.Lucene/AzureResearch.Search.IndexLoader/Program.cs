@@ -20,7 +20,14 @@ namespace AzureResearch.Search.IndexLoader
             CustomSearchTableRepository tableRepo = new CustomSearchTableRepository(connectionString);
             CustomSearchQueueRepository queueRepo = new CustomSearchQueueRepository(connectionString);
 
-            for (int iteration = 0; iteration < 100; iteration++)
+            int rowsToLoad = 100;
+            int.TryParse(ConfigurationManager.AppSettings["RowsToLoad"], out rowsToLoad);
+            if (rowsToLoad <= 0)
+                rowsToLoad = 100;
+
+            Console.WriteLine("Loading {0} entities", rowsToLoad);
+
+            for (int iteration = 0; iteration < rowsToLoad; iteration++)
             {
                 CustomSearchEntity entity = CustomSearchEntity.GetRandom();
                 Parallel.Invoke(
@@ -41,6 +48,13 @@ namespace AzureResearch.Search.IndexLoader
                     }
                 );
             }
+
+            Console.WriteLine("Sending optimization request");
+
+            queueRepo.QueueIndexingRequest(new CustomSearchIndexingRequest()
+            {
+                Optimize = true
+            });
 
             Console.WriteLine("Press ENTER to stop index loader");
             Console.ReadLine();

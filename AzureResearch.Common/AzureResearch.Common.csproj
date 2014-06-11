@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\QueueNames.cs" />
     <Compile Include="Constants\TableNames.cs" />
     <Compile Include="Entities\CustomSearchEntity.cs" />
     <Compile Include="Entities\CustomSearchIndexingRequest.cs" />

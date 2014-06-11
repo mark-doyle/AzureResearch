@@ -24,5 +24,7 @@ namespace AzureResearch.Common.Constants
         public const string LokadWideEntityLargePartitionFewRows = "LWELPFR";
         public const string LokadWideEntitySmallPartitionManyRows = "LWESPMR";
         public const string LokadWideEntitySmallPartitionFewRows = "LWESPFR";
+
+        public const string CustomSearchEntity = "customsearchentity";
     }
 }
