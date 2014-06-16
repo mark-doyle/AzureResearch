@@ -19,6 +19,7 @@ using Version = Lucene.Net.Util.Version;
 using Microsoft.WindowsAzure.Storage;
 
 using AzureResearch.Common.Entities;
+using AzureResearch.Common.Constants;
 
 namespace AzureResearch.Search.Lucene
 {
@@ -47,7 +48,12 @@ namespace AzureResearch.Search.Lucene
         #region Constructors
 
         public CustomSearchIndexRepository(string connectionString)
-            : base("customsearchentity", false, connectionString)
+            : base(BlobNames.CustomSearchBlob, false, connectionString)
+        {
+        }
+
+        public CustomSearchIndexRepository(string connectionString, bool cacheInMemory)
+            : base(BlobNames.CustomSearchBlob, cacheInMemory, connectionString)
         {
         }
 

@@ -23,7 +23,7 @@ namespace AzureResearch.Search.WebApi.Controllers
             {
                 if (_searchRepository == null)
                 {
-                    _searchRepository = new CustomSearchIndexRepository(ConnectionString);
+                    _searchRepository = new CustomSearchIndexRepository(ConnectionString, true);
                 }
                 return _searchRepository;
             }
