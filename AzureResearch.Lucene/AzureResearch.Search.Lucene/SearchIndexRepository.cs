@@ -208,6 +208,7 @@ namespace AzureResearch.Search.Lucene
 
             // add entry to index
             this._indexWriter.AddDocument(doc);
+            this._indexWriter.Commit();
         }
 
         /// <summary>
