@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.Common", "..\AzureResearch.Common\AzureResearch.Common.csproj", "{649F892B-96C0-418C-BDC0-1DEBD2CB3A39}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.Common", "Libraries\AzureResearch.Common\AzureResearch.Common.csproj", "{649F892B-96C0-418C-BDC0-1DEBD2CB3A39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.Search.Lucene", "AzureResearch.Search.Lucene\AzureResearch.Search.Lucene.csproj", "{200D7AC4-91F9-42DD-A7D6-361B3BFB310E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.Search.Lucene", "Libraries\AzureResearch.Search.Lucene\AzureResearch.Search.Lucene.csproj", "{200D7AC4-91F9-42DD-A7D6-361B3BFB310E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.Search.IndexLoader", "AzureResearch.Search.IndexLoader\AzureResearch.Search.IndexLoader.csproj", "{A989F5D2-79DC-4D06-A45A-4682F44E6FCD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.Search.IndexLoader", "Console\AzureResearch.Search.IndexLoader\AzureResearch.Search.IndexLoader.csproj", "{A989F5D2-79DC-4D06-A45A-4682F44E6FCD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.Search.IndexingWorker", "AzureResearch.Search.IndexingWorker\AzureResearch.Search.IndexingWorker.csproj", "{EE58689C-9F1A-48CF-B79B-2A7EC8126158}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.Search.IndexingWorker", "Console\AzureResearch.Search.IndexingWorker\AzureResearch.Search.IndexingWorker.csproj", "{EE58689C-9F1A-48CF-B79B-2A7EC8126158}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.Search.WebApi", "AzureResearch.Search.WebApi\AzureResearch.Search.WebApi.csproj", "{FDE49C74-2AA9-4107-B849-A6A4D732F3FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.Search.WebApi", "Web\AzureResearch.Search.WebApi\AzureResearch.Search.WebApi.csproj", "{FDE49C74-2AA9-4107-B849-A6A4D732F3FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

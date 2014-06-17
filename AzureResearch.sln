@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.Common", "AzureResearch.Common\AzureResearch.Common.csproj", "{649F892B-96C0-418C-BDC0-1DEBD2CB3A39}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.Common", "Libraries\AzureResearch.Common\AzureResearch.Common.csproj", "{649F892B-96C0-418C-BDC0-1DEBD2CB3A39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.PerformanceComparisons", "AzureResearch.PerformanceComparisons\AzureResearch.PerformanceComparisons.csproj", "{06D65083-48B4-42BF-8931-F44E4FFD0B73}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureResearch.PerformanceComparisons", "Console\AzureResearch.PerformanceComparisons\AzureResearch.PerformanceComparisons.csproj", "{06D65083-48B4-42BF-8931-F44E4FFD0B73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
